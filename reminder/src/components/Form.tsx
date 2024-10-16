@@ -9,7 +9,7 @@ export default function ReminderApp() {
 
   const [tasks, setTasks] = useState<Task[]>([])
   const [newTask, setNewTask] = useState('')
-  const [taskTime, setTaskTime] = useState<string | ''>('')
+  const [taskTime, setTaskTime] = useState<string | number>(1)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>){
@@ -25,11 +25,11 @@ export default function ReminderApp() {
     if (newTask.trim() !== "" && timeInMinutes !== 0) {
       setTasks([...tasks, { name: newTask, timeLeft: timeInMinutes * 60 }]);
       setNewTask("");
-      setTaskTime("");
+      setTaskTime(1);
       setErrorMsg(null);
     } else {
       setErrorMsg(
-        "Reminder Name and Task Time must not be empty Or have the same Name."
+        "Reminder Name and Task Time must not be empty."
       );
     }
   }
@@ -58,8 +58,8 @@ export default function ReminderApp() {
   return(
     <div>
       <h1>Reminder App</h1>
-      <input onChange={handleInputChange} type="text" placeholder='Task name...' />
-      <input onChange={handleTimeChange} type="number" placeholder='Time : (Minutes)' min='1' />
+      <input onChange={handleInputChange} type="text" placeholder='Task name...' value={newTask} />
+      <input onChange={handleTimeChange} type="number" placeholder='Time : (Minutes)' min='1' value={taskTime} />
       <button onClick={addTask}>Add</button>
       {errorMsg && <div>{errorMsg}</div>}
       {tasks.map((task, index) => (

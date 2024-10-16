@@ -58,7 +58,7 @@ export default function ReminderApp() {
   return(
     <div>
       <h1>Reminder App</h1>
-      <input onChange={handleInputChange} type="text" placeholder='Task name...' value={newTask} />
+      <input onChange={handleInputChange} type="text" placeholder='Task name...' value={newTask} autoFocus />
       <input onChange={handleTimeChange} type="number" placeholder='Time : (Minutes)' min='1' value={taskTime} />
       <button onClick={addTask}>Add</button>
       {errorMsg && <div>{errorMsg}</div>}

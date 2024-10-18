@@ -2,3 +2,8 @@ body {
   background-color: grey;
   font-family: sans-serif
 }
+
+.task {
+  display: flex;
+  gap: 10px;
+}

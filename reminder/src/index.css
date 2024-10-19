@@ -3,7 +3,87 @@ body {
   font-family: sans-serif
 }
 
-.task {
+input {
+  border-radius: 3px;
+  border: none;
+  height: 30px;
+  width: 100%;
+  font-size: 1.3rem;
+}
+
+button {
+  border-radius: 6px;
+  padding: 4px;
+  border: none;
+}
+
+.reminder-app {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-size: 3rem;
+}
+
+.input-container {
+  background-color: rgb(132, 159, 171);
   display: flex;
   gap: 10px;
+  justify-content: center;
+  margin: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+}
+
+.task-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 219, 231);
+  
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.task p {
+  text-decoration: underline;
+}
+
+
+.time-green {
+  background-color: green;
+  border-radius: 2px;
+}
+
+.time-red {
+  background-color: red;
+    border-radius: 2px;
+    box-shadow: 0px 5px 4px solid rgb(13, 255, 1);
+}
+
+.error {
+  background-color: green;
+  padding-left: 50px;
+  color: red;
 }

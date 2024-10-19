@@ -94,22 +94,44 @@ export default function ReminderApp() {
     }
   }
 
-  return(
-    <div>
-      <h1>Reminder App</h1>
-      <input onChange={handleInputChange} onKeyDown={hadleKeyDown} type="text" placeholder='Task name...' value={newTask} autoFocus />
-      <input onChange={handleTimeChange} onKeyDown={hadleKeyDown} type="number" placeholder='Time : (Minutes)' min='1' value={taskTime} />
-      <button onClick={addTask} onKeyDown={hadleKeyDown}>Add</button>
-      {errorMsg && <div>{errorMsg}</div>}
-      <div className='task-container'>
+  return (
+    <div className='reminder-app'>
+      <div className="app-container">
+      <h1 className='header'>Reminder App</h1>
+      <div className="input-container">
+        <input
+          onChange={handleInputChange}
+          onKeyDown={hadleKeyDown}
+          type="text"
+          placeholder="Task name..."
+          value={newTask}
+          autoFocus
+        />
+        <input
+          onChange={handleTimeChange}
+          onKeyDown={hadleKeyDown}
+          type="number"
+          placeholder="Time : (Minutes)"
+          min="1"
+          value={taskTime}
+        />
+        <button onClick={addTask} onKeyDown={hadleKeyDown}>
+          Add
+        </button>
+      </div>
+      {errorMsg && <div className='error'>{errorMsg}</div>}
+      <div className="task-container">
         {tasks.map((task, index) => (
-          <div key={index} className='task'>
+          <div key={index} className="task">
             <p>{task.name}</p>
-            <p>Time left: {formatTime(task.timeLeft)}</p>
+            <p className={task.timeLeft > 1 ? "time-green" : "time-red"}>
+              Time left: {formatTime(task.timeLeft)}
+            </p>
             <button onClick={() => deleteTask(index)}>Delete</button>
           </div>
         ))}
       </div>
+      </div>
     </div>
-  )
+  );
 }

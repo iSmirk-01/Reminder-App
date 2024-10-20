@@ -97,7 +97,7 @@ export default function ReminderApp() {
   return (
     <div className='reminder-app'>
       <div className="app-container">
-      <h1 className='header'>Reminder App</h1>
+      <h1 className='header gradient-text'>Reminder App</h1>
       <div className="input-container">
         <input
           onChange={handleInputChange}
@@ -120,6 +120,7 @@ export default function ReminderApp() {
         </button>
       </div>
       {errorMsg && <div className='error'>{errorMsg}</div>}
+      {tasks.length > 0 && (
       <div className="task-container">
         {tasks.map((task, index) => (
           <div key={index} className="task">
@@ -131,6 +132,7 @@ export default function ReminderApp() {
           </div>
         ))}
       </div>
+      )}
       </div>
     </div>
   );

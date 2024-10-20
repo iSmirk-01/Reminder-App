@@ -1,6 +1,6 @@
 body {
-  background-color: grey;
-  font-family: sans-serif
+  font-family: sans-serif;
+  background-color: rgb(35, 55, 80);
 }
 
 input {
@@ -15,12 +15,12 @@ button {
   border-radius: 6px;
   padding: 4px;
   border: none;
+  cursor: pointer;
 }
 
 .reminder-app {
   display: flex;
   flex-direction: column;
-  background-color: red;
   justify-content: center;
   align-items: center;
 }
@@ -34,14 +34,11 @@ button {
 .header {
   display: flex;
   justify-content: center;
-  background-color: black;
-  color: white;
   padding: 20px;
   font-size: 3rem;
 }
 
 .input-container {
-  background-color: rgb(132, 159, 171);
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -49,41 +46,51 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  
+}
+
+.task-container button {
+  width: 50px;
+  height: 30px;
+  margin-top: 20px;
 }
 
 .task-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(0, 219, 231);
-  
+background: linear-gradient(0deg, rgb(0, 251, 255) 0%, rgb(28, 139, 183) 100%);
+border-radius: 8px;
+  width: 480px;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto; /* 3 columns */
+  gap: 10px;
+  padding: 10px;
 }
 
 .task {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.task p {
-  text-decoration: underline;
+  display: contents; /* allows the grid to work properly */
 }
 
+.task p {
+  font-size: 1.4rem;
+}
 
 .time-green {
-  background-color: green;
+  background-color: rgb(1, 189, 1);
   border-radius: 2px;
 }
 
 .time-red {
   background-color: red;
-    border-radius: 2px;
-    box-shadow: 0px 5px 4px solid rgb(13, 255, 1);
+  border-radius: 2px;
 }
 
 .error {
-  background-color: green;
-  padding-left: 50px;
+  margin-bottom: 5px;
+  padding-left: 30px;
   color: red;
+  font-size: 1.2rem;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ff7f50, #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

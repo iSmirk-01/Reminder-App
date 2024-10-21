@@ -1,4 +1,4 @@
-import {useState, useEffect, ChangeEvent, useRef} from 'react'
+import {useState, useEffect, ChangeEvent} from 'react'
 
 type Task = {
   name: string
@@ -13,7 +13,6 @@ export default function ReminderApp() {
   const [taskTime, setTaskTime] = useState<string | number>(1)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [permission, setPermission] = useState(Notification.permission)
-  const isFirstRender = useRef(true)
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>){
     setNewTask(event.target.value);
@@ -44,43 +43,51 @@ export default function ReminderApp() {
   }
 
   useEffect(() => {
+    const storedTask = window.localStorage.getItem('tasks')
 
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
+    if (storedTask) {
+      if (storedTask !== null) setTasks(JSON.parse(storedTask))
     }
+  },[])
 
-    console.log('useEffect trigger')
-
+  useEffect(() => {
     if ('Notification' in window) {
-      console.log(`notifications supported`)
+      console.log('notification supported')
     }else {
-      console.log('not supported')
+      console.log('notification not supported')
     }
 
     if (permission !== 'granted') {
-      Notification.requestPermission().then((result) => {
-        setPermission(result)
+      Notification.requestPermission().then((res) => {
+        setPermission(res)
       })
     }
+  }, [permission])
+
+  useEffect(() => {
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
 
     const intervalId = setInterval(() => {
       setTasks((prevTask) =>
         prevTask.map((task) => {
-          if (task.timeLeft === 59 && !task.notified && permission === 'granted') {
-            console.log('creating noti for task')
-            new Notification(`${task.name} is due!!!`)
-          return {...task, timeLeft: task.timeLeft - 1, notified: true}
-          }else if (task.timeLeft > 0) {            
-            return {...task, timeLeft: task.timeLeft - 1}
-          }
-          return task
+          if (task.timeLeft > 0) {
+            const updatedTask = {...task, timeLeft: task.timeLeft - 1}
+            if (updatedTask.timeLeft === 59 && !task.notified) {
+              console.log('creating noti for task')
+              if (permission === 'granted') {
+                new Notification(`${task.name} is due!!!`);
+                return {...updatedTask, notified: true}
+              }
+            }
+              return updatedTask
+            }
+              return task
         })
       )
     }, 1000);
-    console.log('clearing interval')
     return () => clearInterval(intervalId)
-  }, [permission])
+  }, )
 
   function formatTime(seconds: number) {
     const minutes = Math.floor(seconds / 60)

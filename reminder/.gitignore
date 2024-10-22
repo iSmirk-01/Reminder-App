@@ -7,18 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Node modules and build artifacts
 node_modules
 dist
 dist-ssr
-build/
-coverage/
 *.local
-
-# Environment variable files
-.env
-.env.local
-.env.*.local
 
 # Editor directories and files
 .vscode/*
@@ -30,15 +22,4 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
-
-# OS specific files
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-# Windows
-Thumbs.db
-ehthumbs.db
-Icon?
-# Linux
-*~
+.gitignore
